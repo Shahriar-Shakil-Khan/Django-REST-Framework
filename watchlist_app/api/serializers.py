@@ -3,6 +3,7 @@ from watchlist_app import models
 
 
 class ReviewSerializer(serializers.ModelSerializer):
+    reviewer = serializers.StringRelatedField()
      
     class Meta:
         model = models.Reviews

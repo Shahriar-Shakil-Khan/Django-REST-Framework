@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, viewsets
+from rest_framework.permissions import IsAuthenticated
+from . import permission
 
 
 
@@ -94,3 +96,4 @@ class MovieListViewSet(viewsets.ModelViewSet):
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = models.Reviews.objects.select_related('movie')
     serializer_class = serializers.ReviewSerializer
+    permission_classes = [permission.IsReviewerOrReadOnly,IsAuthenticated]

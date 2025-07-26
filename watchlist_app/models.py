@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -13,7 +14,7 @@ class MovieLast(models.Model):
     
 class Reviews(models.Model):
     movie = models.ForeignKey(MovieLast,on_delete=models.CASCADE, related_name='reviews')
-    reviewer = models.CharField(max_length=100)
+    reviewer = models.ForeignKey(User, on_delete=models.CASCADE)
     rating =   models.TextField() 
     comment = models.TextField() 
     created = models.DateTimeField(auto_now_add=True)
