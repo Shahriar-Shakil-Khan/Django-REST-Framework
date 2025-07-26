@@ -71,4 +71,18 @@ class MovieLastCreateView(generics.ListCreateAPIView):
 class MovieDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.MovieLast.objects.all()
     serializer_class = serializers.MovieLastSerializer
+    
+  
+#list of all reviews, create a new review    
+class ReviewLastCreateView(generics.ListCreateAPIView):
+    queryset = models.Reviews.objects.all()
+    serializer_class = serializers.ReviewSerializer
+     
+     
+#singe review /update/delete  
+class ReviewDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Reviews.objects.all()
+    serializer_class = serializers.ReviewSerializer
+        
+    
        
