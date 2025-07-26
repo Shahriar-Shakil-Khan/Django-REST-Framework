@@ -17,3 +17,8 @@ class Reviews(models.Model):
     rating =   models.TextField() 
     comment = models.TextField() 
     created = models.DateTimeField(auto_now_add=True)
+    
+    
+    def __str__(self):
+        return f"{self.reviewer},{self.rating}"
+ 
