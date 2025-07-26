@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
-from rest_framework import generics
+from rest_framework import generics, viewsets
 
 
 
@@ -61,28 +61,36 @@ from rest_framework import generics
             
 
      
-# list of all movie , create a new movie    
-class MovieLastCreateView(generics.ListCreateAPIView):
-    queryset = models.MovieLast.objects.all()
-    serializer_class = serializers.MovieLastSerializer
+# # list of all movie , create a new movie    
+# class MovieLastCreateView(generics.ListCreateAPIView):
+#     queryset = models.MovieLast.objects.all()
+#     serializer_class = serializers.MovieLastSerializer
      
      
-#singe move /update/delete  
-class MovieDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.MovieLast.objects.all()
-    serializer_class = serializers.MovieLastSerializer
+# #singe move /update/delete  
+# class MovieDetailView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = models.MovieLast.objects.all()
+#     serializer_class = serializers.MovieLastSerializer
     
   
-#list of all reviews, create a new review    
-class ReviewLastCreateView(generics.ListCreateAPIView):
-    queryset = models.Reviews.objects.all()
-    serializer_class = serializers.ReviewSerializer
+# #list of all reviews, create a new review    
+# class ReviewLastCreateView(generics.ListCreateAPIView):
+#     queryset = models.Reviews.objects.all()
+#     serializer_class = serializers.ReviewSerializer
      
      
-#singe review /update/delete  
-class ReviewDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.Reviews.objects.all()
-    serializer_class = serializers.ReviewSerializer
+# #singe review /update/delete  
+# class ReviewDetailView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = models.Reviews.objects.all()
+#     serializer_class = serializers.ReviewSerializer
         
+
+class MovieListViewSet(viewsets.ModelViewSet):
+    queryset = models.MovieLast.objects.prefetch_related('reviews')
+    serializer_class = serializers.MovieLastSerializer
     
-       
+
+
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = models.Reviews.objects.select_related('movie')
+    serializer_class = serializers.ReviewSerializer
